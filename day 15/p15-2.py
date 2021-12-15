@@ -5,6 +5,34 @@ file = open("p15-input","r")
 lines = file.read().splitlines()
 file.close()
 
+w = len(lines[0])
+h = len(lines)
+
+for i in range(len(lines)):
+    lines[i] = lines[i] * 5
+
+for y in range(len(lines)):
+    for i in range(1, 5):
+        for x in range(w):
+            x = x + (w * i)
+            val = int(lines[y][x])
+            val += i
+            if val > 9:
+                val -= 9
+            lines[y] = lines[y][:x] + str(val) + lines[y][x + 1:]
+
+lines = lines * 5
+
+for x in range(len(lines[0])):
+    for i in range(1, 5):
+        for y in range(w):
+            y = y + (w * i)
+            val = int(lines[y][x])
+            val += i
+            if val > 9:
+                val -= 9
+            lines[y] = lines[y][:x] + str(val) + lines[y][x + 1:]
+
 grid = [[int(x) for x in y] for y in lines]
 
 start = (0, 0)
@@ -51,6 +79,7 @@ while len(queue) > 0:
             prev[adj] = u
 
     queue.remove(u)
+    print(len(queue))
 
 risk = 0
 u = stop
