@@ -1,5 +1,5 @@
 from pprint import pprint
-from decimal import Decimal
+import sys
 
 file = open("p15-input","r")
 lines = file.read().splitlines()
@@ -46,7 +46,7 @@ for y in range(len(grid)):
     for x in range(len(grid[y])):
         node = (x, y)
         queue.append(node)
-        dist[node] = Decimal('Infinity')
+        dist[node] = sys.maxsize
         prev[node] = None
 
 dist[start] = 0
